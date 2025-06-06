@@ -15,22 +15,20 @@ passport.use(new GoogleStrategy({
       const email = profile.emails[0].value;
       const domain = email.split('@')[1];
 
-      if (email === process.env.ADMIN_EMAIL || domain === 'svsu.ac.in') {
-        let user = await User.findOne({ googleId: profile.id });
+      // ✅ Allow all domains for testing (including @gmail.com)
+      let user = await User.findOne({ googleId: profile.id });
 
-        if (!user) {
-          user = await User.create({
-            googleId: profile.id,
-            displayName: profile.displayName || "No Name",
-            email: email,
-            isAdmin: email === process.env.ADMIN_EMAIL
-          });
-        }
-
-        return done(null, user);
-      } else {
-        return done(null, false, { message: 'Unauthorized email domain' });
+      if (!user) {
+        user = await User.create({
+          googleId: profile.id,
+          displayName: profile.displayName || "No Name",
+          email: email,
+          // Only mark isAdmin true for specific conditions
+          isAdmin: email === process.env.ADMIN_EMAIL || domain === 'svsu.ac.in'
+        });
       }
+
+      return done(null, user);
     } catch (err) {
       return done(err);
     }

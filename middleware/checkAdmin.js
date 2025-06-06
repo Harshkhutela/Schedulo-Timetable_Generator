@@ -3,9 +3,13 @@ module.exports = function checkAdmin(req, res, next) {
     return res.redirect('/auth/login');
   }
 
-  if (!req.user || req.user.email !== process.env.ADMIN_EMAIL) {
-    return res.status(403).send('Access Denied: Admins only');
+  const email = req.user?.email || '';
+  const domain = email.split('@')[1];
+
+  // ✅ Allow if: (1) exact admin email OR (2) belongs to svsu.ac.in
+  if (email === process.env.ADMIN_EMAIL || domain === 'svsu.ac.in') {
+    return next();
   }
 
-  next();
+  return res.status(403).send('Access Denied: Admins only');
 };
