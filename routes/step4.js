@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Classroom = require('../models/Classroom');
+const Classroom = require('../models/classroom');
 
 // View Step 4
 router.get('/', async (req, res) => {

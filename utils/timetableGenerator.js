@@ -123,7 +123,7 @@ function timetableGenerator(courses, subjects, teachers, classrooms) {
                   const label = `${subject.shortName} (${labGroup})`;
 
                   const cell = {
-                    room: room.roomNumber,
+                    room: `${room.roomNumber}, ${room.building}`,
                     subject: label,
                     teacher: teacher?.shortName || 'TBA'
                   };
@@ -182,7 +182,7 @@ function timetableGenerator(courses, subjects, teachers, classrooms) {
                   if (!assignedRoomForCourse) assignedRoomForCourse = room.roomNumber;
 
                   const cell = {
-                    room: room.roomNumber,
+                    room: `${room.roomNumber}, ${room.building}`,
                     subject: subject.shortName,
                     teacher: teacher?.shortName || 'TBA'
                   };

@@ -3,7 +3,7 @@ const router = express.Router();
 const Course = require('../models/Course');
 const Subject = require('../models/Subject');
 const Teacher = require('../models/Teacher');
-const Classroom = require('../models/Classroom');
+const Classroom = require('../models/classroom');
 const Timetable = require('../models/Timetable');
 const timetableGenerator = require('../utils/timetableGenerator');
 

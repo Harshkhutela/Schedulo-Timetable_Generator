@@ -22,27 +22,41 @@
   </style>
 </head>
 <body>
-  <!-- Header goes here -->
-  <header class="bg-[#0F044C] shadow-md py-6 px-8 mb-6 w-full">
-  <div class="flex justify-between items-center w-full">
-    <!-- Left logo -->
-    <img src="/images/Logo.png" alt="Logo" class="h-12 filter brightness-0 invert" />
+    <!-- Header -->
+<header class="bg-[#0F044C] shadow-md py-4 px-6 w-full">
+  <div class="flex items-center justify-between max-w-7xl mx-auto">
+    <!-- Left: Logo or Schedulo -->
+    <div class="flex items-center space-x-3">
+      <img src="/images/Logo.png" alt="Logo" class="h-10 md:h-14 filter brightness-0 invert" />
+    </div>
 
-    <!-- Title -->
-    <h1 class="text-3xl font-bold text-[#EEEEEE] tracking-wide font-[Cookie] text-center flex-1">
-      Academic Timetable Viewer
-    </h1>
+    <!-- Desktop Nav Links -->
+    <div class="hidden md:flex items-center space-x-4">
+      <a href="/user/timetable" class="bg-[#0F044C] text-white px-4 py-2 rounded hover:bg-[#787A91] transition text-sm md:text-base">Full Timetable</a>
+      <a href="/user/timetable/today" class="bg-[#0F044C] text-white px-4 py-2 rounded hover:bg-[#787A91] transition text-sm md:text-base">Today’s Timetable</a>
+      <a href="/auth/logout" class="bg-[#0F044C] text-white px-4 py-2 rounded hover:bg-[#787A91] transition text-sm md:text-base">Logout</a>
+    </div>
 
-    <!-- Right logo -->
-    <img src="/images/svsu_logo.png" alt="University Logo" class="h-12" />
+    <!-- Mobile Menu Button -->
+    <div class="md:hidden relative">
+      <button id="menuToggle" class="text-white focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+             viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+
+      <!-- Dropdown Menu -->
+      <div id="mobileMenu" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden z-50">
+        <a href="/user/timetable" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Full Timetable</a>
+        <a href="/user/timetable/today" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Today’s Timetable</a>
+        <a href="/auth/logout" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
+      </div>
+    </div>
   </div>
 </header>
 </body>
 </html>
-  </a>
-  <a href="/auth/logout" class="btn btn-outline-danger right-5 absolute text-1xl bg-[#141E61] text-white px-6 py-2 rounded-md hover:bg-[#787A91] transition duration-300" style="margin-top: 110px;">
-    Logout
-  </a>
 
 <body>
   <div class="container mt-4" style="padding: 0 40px;">
@@ -176,8 +190,24 @@
     <% } %>
   </div>
 
-  <footer style="background-color: #0F044C; padding: 15px; text-align: center; color: white; margin-top: 50px;">
-    <p>© 2025 TimeTable System</p>
+  <!-- ✅ Footer stays at bottom -->
+  <footer class="bg-[#0F044C] text-white text-center py-4">
+     <p>©2025 Schedulo</p>
+  <p>
+    <a href="/about" class="underline hover:text-gray-300 transition">About Us</a>
+  </p>
   </footer>
+
+<script>
+  // Mobile Menu Toggle
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  if (menuToggle && mobileMenu) {
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  }
+</script>
 </body>
 </html>

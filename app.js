@@ -66,6 +66,7 @@ app.use('/auth', authRoutes);
 
 // User routes
 app.use('/user', userRoutes);
+app.use('/', userRoutes); 
 
 // Protected Step routes (only logged in & admin users)
 app.use('/step1', isLoggedIn, checkAdmin, step1Routes);

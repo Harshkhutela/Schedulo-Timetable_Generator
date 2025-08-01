@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Course = require('../models/Course');
 const Subject = require('../models/Subject');
-const Classroom = require('../models/Classroom');
+const Classroom = require('../models/classroom');
 
 // Step 3: Get Course Details
 router.get('/', async (req, res) => {
