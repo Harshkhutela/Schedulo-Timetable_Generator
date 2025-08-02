@@ -92,4 +92,8 @@ router.get('/', async (req, res) => {
   });
 });
 
+router.get('/timetable', (req, res) => {
+  res.render('user/timetable'); // no need to add .ejs
+});
+
 module.exports = router;

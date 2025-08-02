@@ -190,6 +190,14 @@
     <% } %>
   </div>
 
+<% if (typeof userEmail !== 'undefined' && userEmail === 'Monika.jangra@svsu.ac.in') { %>
+  <div class="flex justify-center my-6">
+    <a href="/user/timetable/export/excel" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
+      Download Timetable (Excel)
+    </a>
+  </div>
+<% } %>
+
   <!-- ✅ Footer stays at bottom -->
   <footer class="bg-[#0F044C] text-white text-center py-4">
      <p>©2025 Schedulo</p>

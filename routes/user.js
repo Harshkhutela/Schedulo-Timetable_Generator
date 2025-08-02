@@ -67,7 +67,8 @@ router.get('/timetable', ensureAuthenticated, async (req, res) => {
       slots,
       days,
       courses,
-      selectedCourse
+      selectedCourse,
+      userEmail: req.user?.email || ''
     });
   } catch (err) {
     console.error('Error fetching timetable:', err);
@@ -175,5 +176,25 @@ router.get('/timetable/today', ensureAuthenticated, async (req, res) => {
 });
 
 
+// ✅ Excel Export Route
+const generateStyledTimetableExcel = require('../utils/excelGenerator');
+
+router.get('/timetable/export/excel', async (req, res) => {
+  try {
+    const latestTimetableDoc = await Timetable.findOne().sort({ createdAt: -1 });
+    if (!latestTimetableDoc) return res.status(404).send('No timetable found.');
+
+    const workbook = generateStyledTimetableExcel(latestTimetableDoc);
+
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    res.setHeader('Content-Disposition', 'attachment; filename=timetable.xlsx');
+
+    await workbook.xlsx.write(res);
+    res.end();
+  } catch (err) {
+    console.error('Excel export error:', err);
+    res.status(500).send('Error generating Excel.');
+  }
+});
 
 module.exports = router;
